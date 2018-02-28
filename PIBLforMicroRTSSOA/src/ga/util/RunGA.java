@@ -40,13 +40,16 @@ public class RunGA {
 		populations=new ArrayList<Population>();
 		for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
 		{
-			population = Population.getInitialPopulation(ConfigurationsGA.SIZE_POPULATION);
+			population = Population.getInitialPopulation(ConfigurationsGA.SIZE_CHROMOSOME);
+			System.out.println("new");
+			population.printWithValue();
 			populations.add(population);
 		}
 		
 		//Fase 2 = avalia a população
-		Population completePopulation=new Population();
 		HashMap<Chromosome, BigDecimal> ChromosomesCompletePopulation =  new HashMap<>();
+		Population completePopulation=new Population(ChromosomesCompletePopulation);
+		
 		for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
 		{			
 			ChromosomesCompletePopulation.putAll(populations.get(i).getChromosomes());
@@ -56,6 +59,8 @@ public class RunGA {
 		for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
 		{			
 			updateFitnessPopulation(populations.get(i),completePopulation);
+			System.out.println("newUpdated");
+			populations.get(i).printWithValue();
 		}
 		
 		
