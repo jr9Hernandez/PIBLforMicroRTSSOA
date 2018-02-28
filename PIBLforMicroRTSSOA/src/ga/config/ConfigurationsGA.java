@@ -5,8 +5,10 @@ public final class ConfigurationsGA {
 	public final static int QTD_SCRIPTS = 300;
 	//tamanho fixo do cromossomo
 	public final static int SIZE_CHROMOSOME = 5;
-	//tamanho fixo da população
+	//tamanho fixo da população total
 	public final static int SIZE_POPULATION = 20;
+	//tamanho fixo de cada subpopulação
+	public final static int SIZE_SUBPOPULATION = 4;
 	//Total de jobs que serão enviados ao cluster
 	public final static int NUMBER_JOBS = 30;
 	//tamanho fixo da elite

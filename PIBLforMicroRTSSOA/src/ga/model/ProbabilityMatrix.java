@@ -1,35 +1,36 @@
 package ga.model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import ga.config.ConfigurationsGA;
 
 public class ProbabilityMatrix {
 	
-	ArrayList<double[][]> ProbabilityMatrices;
+	private ArrayList<double[][]> probabilityMatrices;
 	//int numMatrices;
+	static Random rand = new Random();
 	
 	public ProbabilityMatrix()
 	{
-		
+		probabilityMatrices=ProbabilitiesMatrixGeneration(ConfigurationsGA.SIZE_CHROMOSOME);
 	}
 	
 	public ArrayList<double[][]> ProbabilitiesMatrixGeneration(int numMatrices)
 	{
-		ProbabilityMatrices=new ArrayList<double[][]>();
+		probabilityMatrices=new ArrayList<double[][]>();
 		for(int i=numMatrices;i>0;i--)
 		{			
-			ProbabilityMatrices.add(ProbabilitiesMatrixInitialization(i,ConfigurationsGA.QTD_SCRIPTS));
+			probabilityMatrices.add(ProbabilitiesMatrixInitialization(i,ConfigurationsGA.QTD_SCRIPTS));
 		}
 		
 		//printMatrix(ProbabilityMatrices.get(5));
 		
-		return ProbabilityMatrices;
+		return probabilityMatrices;
 	}
 	public double[][] ProbabilitiesMatrixInitialization(int tamVector, int tamScripts)
 	{
 		double[][] matrix= new double[tamScripts][tamVector];
-		
 		for(int i=0;i<tamScripts;i++)
 		{
 			for(int j=0; j<tamVector; j++)
@@ -53,6 +54,34 @@ public class ProbabilityMatrix {
 			}
 			System.out.println("");
 		}
+	}
+	public int selectionFromProbabilityMatrix(double[] vector)
+	{
+		double sum=0;
+		int j=0;
+		int selected=-1;		
+		double fraction=rand.nextInt(100);
+		fraction=fraction/100;
+		while(selected<0 && j<vector.length)
+		{
+			sum=sum+(vector[j]);
+			if(sum>fraction)
+			{
+				selected=j;
+			}
+			else
+			{
+				j=j+1;
+			}
+		}
+		return j;
+	}
+
+	/**
+	 * @return the probabilityMatrices
+	 */
+	public ArrayList<double[][]> getProbabilityMatrices() {
+		return probabilityMatrices;
 	}
 
 }

@@ -1,6 +1,7 @@
 package ga.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -84,6 +85,30 @@ public class Population {
 			int sizeCh=rand.nextInt(ConfigurationsGA.SIZE_CHROMOSOME)+1;
 			for (int j = 0; j < sizeCh; j++) {
 				tChom.addGene(rand.nextInt(ConfigurationsGA.QTD_SCRIPTS));
+			}
+			newChromosomes.put(tChom, BigDecimal.ZERO);
+		}
+		
+		Population pop = new Population(newChromosomes);
+		return pop;
+	}
+
+	/**
+	 * Cria uma população inicial gerada randomicamente.
+	 * @param size Tamanho limite da população
+	 * @return uma população com Key = Chromosome e Values = 0
+	 */
+	public static Population getInitialPopulation(int sizeCrhom, ProbabilityMatrix pm){
+		HashMap<Chromosome, BigDecimal> newChromosomes = new HashMap<>();
+		
+		Chromosome tChom;
+		for (int i = 0; i < ConfigurationsGA.SIZE_SUBPOPULATION; i++) {
+			//gerar o novo cromossomo com base no tamanho
+			tChom = new Chromosome();
+			//int sizeCh=rand.nextInt(ConfigurationsGA.SIZE_CHROMOSOME)+1;
+			for (int j = 0; j < sizeCrhom; j++) {
+				//tChom.addGene(rand.nextInt(ConfigurationsGA.QTD_SCRIPTS));
+				tChom.addGene(pm.selectionFromProbabilityMatrix(pm.getProbabilityMatrices().get(sizeCrhom-1)[j]));
 			}
 			newChromosomes.put(tChom, BigDecimal.ZERO);
 		}

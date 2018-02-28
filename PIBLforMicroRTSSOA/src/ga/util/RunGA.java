@@ -33,14 +33,12 @@ public class RunGA {
 		
 		//Fase 0 = gerar os vetores de probabilidades	
 		probabilityMat=new ProbabilityMatrix();
-		probabilityMatrices=probabilityMat.ProbabilitiesMatrixGeneration(ConfigurationsGA.SIZE_CHROMOSOME);
-		
-		
+				
 		//Fase 1 = gerar a população inicial 
 		populations=new ArrayList<Population>();
-		for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
+		for(int i=ConfigurationsGA.SIZE_CHROMOSOME;i>0;i--)
 		{
-			population = Population.getInitialPopulation(ConfigurationsGA.SIZE_CHROMOSOME);
+			population = Population.getInitialPopulation(i, probabilityMat);
 			System.out.println("new");
 			population.printWithValue();
 			populations.add(population);
