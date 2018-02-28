@@ -48,8 +48,8 @@ public class RunTests {
 		
 		//Fase 6 - mostrar os mais aptos na população final
 		
-		//Fase 7 - finalizar 
-		fEval.finishProcess();
+		//Fase 7 - finalizar - commented by Julian
+		//fEval.finishProcess();
 		 
 	}
 

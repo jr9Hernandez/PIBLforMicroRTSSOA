@@ -1,29 +1,64 @@
 package ga.util;
 
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import ga.config.ConfigurationsGA;
+import ga.model.Chromosome;
 import ga.model.Population;
+import ga.model.ProbabilityMatrix;
 import ga.util.Evaluation.RatePopulation;
 
 public class RunGA {
 	
 	private Population population;
+	private ArrayList<Population> populations;
+	private ProbabilityMatrix probabilityMat;
+	private ArrayList<double[][]> probabilityMatrices; 
+	
 	private Instant timeInicial;
 	private int generations=0;
 	
 	/**
-	 * Este metodo aplicará todas as fases do processo de um algoritmo Genético
+	 * Este metodo aplicará todas as fases do processo PIBL
 	 * @param evalFunction Será a função de avaliação que desejamos utilizar
 	 */
 	public Population run(RatePopulation evalFunction){
+		
+		//Fase 0 = gerar os vetores de probabilidades	
+		probabilityMat=new ProbabilityMatrix();
+		probabilityMatrices=probabilityMat.ProbabilitiesMatrixGeneration(ConfigurationsGA.SIZE_CHROMOSOME);
+		
+		
 		//Fase 1 = gerar a população inicial 
-		population = Population.getInitialPopulation(ConfigurationsGA.SIZE_POPULATION);
+		populations=new ArrayList<Population>();
+		for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
+		{
+			population = Population.getInitialPopulation(ConfigurationsGA.SIZE_POPULATION);
+			populations.add(population);
+		}
 		
 		//Fase 2 = avalia a população
-		population = evalFunction.evalPopulation(population,this.generations); 
+		Population completePopulation=new Population();
+		HashMap<Chromosome, BigDecimal> ChromosomesCompletePopulation =  new HashMap<>();
+		for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
+		{			
+			ChromosomesCompletePopulation.putAll(populations.get(i).getChromosomes());
+		}
+		completePopulation.setChromosomes(ChromosomesCompletePopulation);
+		completePopulation = evalFunction.evalPopulation(completePopulation,this.generations);
+		for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
+		{			
+			updateFitnessPopulation(populations.get(i),completePopulation);
+		}
+		
+		
 		
 		resetControls();
 		//Fase 3 = critério de parada
@@ -92,5 +127,19 @@ public class RunGA {
 			return false;
 		}
 		
+	}
+	
+	public void updateFitnessPopulation(Population p,  Population completep)
+	{
+	    Iterator it = completep.getChromosomes().entrySet().iterator();
+	    while (it.hasNext()) {
+	        Map.Entry pair = (Map.Entry)it.next();
+	        //System.out.println(pair.getKey() + " = " + pair.getValue());
+	        if(p.getChromosomes().containsKey(pair.getKey()))
+	        {
+	        	p.getChromosomes().put((Chromosome)pair.getKey(), (BigDecimal)pair.getValue());
+	        }
+	        it.remove(); // avoids a ConcurrentModificationException
+	    }
 	}
 }
