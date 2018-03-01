@@ -19,12 +19,12 @@ public class ProbabilityMatrix {
 	public ArrayList<double[][]> ProbabilitiesMatrixGeneration(int numMatrices)
 	{
 		probabilityMatrices=new ArrayList<double[][]>();
-		for(int i=numMatrices;i>0;i--)
+		for(int i=1;i<=numMatrices;i++)
 		{			
 			probabilityMatrices.add(ProbabilitiesMatrixInitialization(i,ConfigurationsGA.QTD_SCRIPTS));
 		}
 		
-		//printMatrix(ProbabilityMatrices.get(5));
+		//printMatrix(probabilityMatrices.get(0));
 		
 		return probabilityMatrices;
 	}
@@ -53,6 +53,13 @@ public class ProbabilityMatrix {
 				System.out.print(matrix[i][j]+" ");
 			}
 			System.out.println("");
+		}
+	}
+	public void printVector(double[] vector)
+	{
+		for(int i=0;i<vector.length;i++)
+		{
+			System.out.println(vector[i]+" ");
 		}
 	}
 	public int selectionFromProbabilityMatrix(double[] vector)

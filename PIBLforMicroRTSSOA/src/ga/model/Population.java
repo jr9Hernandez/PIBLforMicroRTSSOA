@@ -100,7 +100,6 @@ public class Population {
 	 */
 	public static Population getInitialPopulation(int sizeCrhom, ProbabilityMatrix pm){
 		HashMap<Chromosome, BigDecimal> newChromosomes = new HashMap<>();
-		
 		Chromosome tChom;
 		for (int i = 0; i < ConfigurationsGA.SIZE_SUBPOPULATION; i++) {
 			//gerar o novo cromossomo com base no tamanho
@@ -108,8 +107,12 @@ public class Population {
 			//int sizeCh=rand.nextInt(ConfigurationsGA.SIZE_CHROMOSOME)+1;
 			for (int j = 0; j < sizeCrhom; j++) {
 				//tChom.addGene(rand.nextInt(ConfigurationsGA.QTD_SCRIPTS));
-				tChom.addGene(pm.selectionFromProbabilityMatrix(pm.getProbabilityMatrices().get(sizeCrhom-1)[j]));
+				//pm.printMatrix(pm.getProbabilityMatrices().get(sizeCrhom-1));
+				//pm.printVector(getColumn(pm.getProbabilityMatrices().get(sizeCrhom-1),j));
+				System.out.print(pm.selectionFromProbabilityMatrix(getColumn(pm.getProbabilityMatrices().get(sizeCrhom-1),j))+" ");
+				tChom.addGene(pm.selectionFromProbabilityMatrix(getColumn(pm.getProbabilityMatrices().get(sizeCrhom-1),j)));
 			}
+			System.out.println("");
 			newChromosomes.put(tChom, BigDecimal.ZERO);
 		}
 		
@@ -138,6 +141,16 @@ public class Population {
 		
 		Population pop = new Population(newChromosomes);
 		return pop;
+	}
+	
+	
+	//Method for column selection
+	public static double[] getColumn(double[][] ProbabilityMatrix, int index){
+	    double[] column = new double[ProbabilityMatrix.length]; 
+	    for(int i=0; i<column.length; i++){
+	       column[i] = ProbabilityMatrix[i][index];
+	    }
+	    return column;
 	}
 	
 	

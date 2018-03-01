@@ -36,11 +36,12 @@ public class RunGA {
 				
 		//Fase 1 = gerar a população inicial 
 		populations=new ArrayList<Population>();
-		for(int i=ConfigurationsGA.SIZE_CHROMOSOME;i>0;i--)
+		for(int i=1;i<=ConfigurationsGA.SIZE_CHROMOSOME;i++)
 		{
+			System.out.println("matrix "+i);
 			population = Population.getInitialPopulation(i, probabilityMat);
-			System.out.println("new");
-			population.printWithValue();
+			System.out.println("finish");
+			//population.printWithValue();
 			populations.add(population);
 		}
 		
