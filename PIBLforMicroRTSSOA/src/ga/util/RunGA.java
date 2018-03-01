@@ -38,10 +38,10 @@ public class RunGA {
 		populations=new ArrayList<Population>();
 		for(int i=1;i<=ConfigurationsGA.SIZE_CHROMOSOME;i++)
 		{
-			System.out.println("matrix "+i);
+			System.out.println("pop "+i);
 			population = Population.getInitialPopulation(i, probabilityMat);
-			System.out.println("finish");
-			//population.printWithValue();
+			System.out.println("end pop");
+			population.printWithValue();
 			populations.add(population);
 		}
 		

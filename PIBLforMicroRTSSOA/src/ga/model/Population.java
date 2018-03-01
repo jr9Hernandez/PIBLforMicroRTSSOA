@@ -109,8 +109,9 @@ public class Population {
 				//tChom.addGene(rand.nextInt(ConfigurationsGA.QTD_SCRIPTS));
 				//pm.printMatrix(pm.getProbabilityMatrices().get(sizeCrhom-1));
 				//pm.printVector(getColumn(pm.getProbabilityMatrices().get(sizeCrhom-1),j));
-				System.out.print(pm.selectionFromProbabilityMatrix(getColumn(pm.getProbabilityMatrices().get(sizeCrhom-1),j))+" ");
-				tChom.addGene(pm.selectionFromProbabilityMatrix(getColumn(pm.getProbabilityMatrices().get(sizeCrhom-1),j)));
+				int idGene=pm.selectionFromProbabilityMatrix(getColumn(pm.getProbabilityMatrices().get(sizeCrhom-1),j));
+				System.out.print(idGene+" ");
+				tChom.addGene(idGene);
 			}
 			System.out.println("");
 			newChromosomes.put(tChom, BigDecimal.ZERO);
