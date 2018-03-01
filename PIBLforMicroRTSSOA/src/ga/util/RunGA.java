@@ -20,7 +20,6 @@ public class RunGA {
 	private Population population;
 	private ArrayList<Population> populations;
 	private ProbabilityMatrix probabilityMat;
-	private ArrayList<double[][]> probabilityMatrices; 
 	
 	private Instant timeInicial;
 	private int generations=0;
@@ -68,9 +67,8 @@ public class RunGA {
 		//Fase 3 = critério de parada
 		while(continueProcess()){
 			
-			//Fase 4 = Seleção (Aplicar Cruzamento e Mutação)
-			Selection selecao = new Selection();
-			population = selecao.applySelection(population);
+			//Fase 4 = Atualiza matriz de probabilidades
+			probabilityMat.updateMatrix();
 			
 			//Repete-se Fase 2 = Avaliação da população
 			population = evalFunction.evalPopulation(population,this.generations);

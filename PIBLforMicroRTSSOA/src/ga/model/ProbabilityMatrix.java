@@ -13,10 +13,10 @@ public class ProbabilityMatrix {
 	
 	public ProbabilityMatrix()
 	{
-		probabilityMatrices=ProbabilitiesMatrixGeneration(ConfigurationsGA.SIZE_CHROMOSOME);
+		ProbabilitiesMatrixGeneration(ConfigurationsGA.SIZE_CHROMOSOME);
 	}
 	
-	public ArrayList<double[][]> ProbabilitiesMatrixGeneration(int numMatrices)
+	public void ProbabilitiesMatrixGeneration(int numMatrices)
 	{
 		probabilityMatrices=new ArrayList<double[][]>();
 		for(int i=1;i<=numMatrices;i++)
@@ -25,8 +25,7 @@ public class ProbabilityMatrix {
 		}
 		
 		//printMatrix(probabilityMatrices.get(0));
-		
-		return probabilityMatrices;
+
 	}
 	public double[][] ProbabilitiesMatrixInitialization(int tamVector, int tamScripts)
 	{
