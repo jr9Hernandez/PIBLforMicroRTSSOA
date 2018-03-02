@@ -52,13 +52,16 @@ public class ProbabilityMatrix {
 	{
 		Population populationToUpdate=populations.get(indexProbMatrix);
 		sortByValue(populationToUpdate.getChromosomes());
+		
 		for(int i=0;i<ConfigurationsGA.NUMBER_OF_VECTORS_TO_UPDATE_FROM;i++)
 		{
 			for(int j=0;j<indexProbMatrix;j++)
 			{
 				Chromosome ch=(Chromosome)populationToUpdate.getChromosomes().keySet().toArray()[i];
-				probabilityMatrices.get(indexProbMatrix)[i][j]=probabilityMatrices.get(indexProbMatrix)[i][j]*(1-ConfigurationsGA.LEARNING_RATE)+
-																ch.getGenes().get(j);				
+				int bestElement=ch.getGenes().get(j);
+				//probabilityMatrices.get(indexProbMatrix)[bestElement][j]=probabilityMatrices.get(indexProbMatrix)[i][j]*(1-ConfigurationsGA.LEARNING_RATE)+
+				//												ch.getGenes().get(j);	
+				probabilityMatrices.get(indexProbMatrix)[bestElement][j]=probabilityMatrices.get(indexProbMatrix)[bestElement][j]+ConfigurationsGA.LEARNING_RATE;	
 			}
 		}
 		
