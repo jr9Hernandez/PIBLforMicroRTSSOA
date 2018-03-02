@@ -1,6 +1,14 @@
 package ga.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import ga.config.ConfigurationsGA;
@@ -8,7 +16,7 @@ import ga.config.ConfigurationsGA;
 public class ProbabilityMatrix {
 	
 	private ArrayList<double[][]> probabilityMatrices;
-	//int numMatrices;
+	int numMatrices;
 	static Random rand = new Random();
 	
 	public ProbabilityMatrix()
@@ -18,6 +26,7 @@ public class ProbabilityMatrix {
 	
 	public void ProbabilitiesMatrixGeneration(int numMatrices)
 	{
+		this.numMatrices=numMatrices;
 		probabilityMatrices=new ArrayList<double[][]>();
 		for(int i=1;i<=numMatrices;i++)
 		{			
@@ -39,8 +48,19 @@ public class ProbabilityMatrix {
 		}
 		return matrix;
 	}
-	public void updateMatrix()
+	public void updateMatrix(ArrayList<Population> populations, int indexProbMatrix )
 	{
+		Population populationToUpdate=populations.get(indexProbMatrix);
+		sortByValue(populationToUpdate.getChromosomes());
+		for(int i=0;i<ConfigurationsGA.NUMBER_OF_VECTORS_TO_UPDATE_FROM;i++)
+		{
+			for(int j=0;j<indexProbMatrix;j++)
+			{
+				Chromosome ch=(Chromosome)populationToUpdate.getChromosomes().keySet().toArray()[i];
+				probabilityMatrices.get(indexProbMatrix)[i][j]=probabilityMatrices.get(indexProbMatrix)[i][j]*(1-ConfigurationsGA.LEARNING_RATE)+
+																ch.getGenes().get(j);				
+			}
+		}
 		
 	}
 	public void printMatrix(double[][] matrix)
@@ -88,6 +108,29 @@ public class ProbabilityMatrix {
 	 */
 	public ArrayList<double[][]> getProbabilityMatrices() {
 		return probabilityMatrices;
+	}
+	
+	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+		List list = new LinkedList(map.entrySet());
+
+		Collections.sort(list, new Comparator() {
+			public int compare(Object o1, Object o2) {
+				return ((Comparable) ((Map.Entry) (o2)).getValue())
+						.compareTo(((Map.Entry) (o1)).getValue());
+			}
+		});
+
+		HashMap sortedHashMap = new LinkedHashMap();
+		for (Iterator it = list.iterator(); it.hasNext();) {
+			Map.Entry entry = (Map.Entry) it.next();
+			sortedHashMap.put(entry.getKey(), entry.getValue());
+			if(sortedHashMap.size()==ConfigurationsGA.SIZE_ELITE)
+			{
+				break;
+			}
+		} 
+		return sortedHashMap;
+
 	}
 
 }

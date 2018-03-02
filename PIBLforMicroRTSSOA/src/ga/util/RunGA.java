@@ -67,8 +67,14 @@ public class RunGA {
 		//Fase 3 = critério de parada
 		while(continueProcess()){
 			
-			//Fase 4 = Atualiza matriz de probabilidades
-			probabilityMat.updateMatrix();
+			//Fase 4 = Atualiza 
+			for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
+			{
+				probabilityMat.updateMatrix(populations,i);
+			}
+			//Fase 5 - Mutacao
+			Selection selecao = new Selection();
+			population = selecao.applySelection(population);
 			
 			//Repete-se Fase 2 = Avaliação da população
 			population = evalFunction.evalPopulation(population,this.generations);

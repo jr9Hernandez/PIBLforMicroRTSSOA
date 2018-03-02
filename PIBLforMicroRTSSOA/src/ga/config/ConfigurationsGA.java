@@ -19,6 +19,10 @@ public final class ConfigurationsGA {
 	public final static int SIZE_PARENTSFORCROSSOVER = 4;
 	//taxa mutacao
 	public final static double MUTATION_RATE = 0.01;
+	//taxa aprendizado
+	public final static double LEARNING_RATE = 0.01;
+	//Numero de vetores que influenciam na atualizacao da matriz de probabilidades
+	public final static int NUMBER_OF_VECTORS_TO_UPDATE_FROM=1;
 	//---------------------------------------------------------------------------------
 	//Controle do dispositivo de parada do GA
 	//Parametro: 0 = Tempo; 1 = Gerações
