@@ -21,6 +21,10 @@ public class Reproduction {
 	{
 		this.parents=parents;
 	}
+	public Reproduction()
+	{
+	
+	}
 	public Population UniformCrossover()
 	{
 		Population newGeneration;

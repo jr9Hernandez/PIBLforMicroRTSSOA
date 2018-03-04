@@ -58,10 +58,17 @@ public class ProbabilityMatrix {
 			for(int j=0;j<indexProbMatrix;j++)
 			{
 				Chromosome ch=(Chromosome)populationToUpdate.getChromosomes().keySet().toArray()[i];
-				int bestElement=ch.getGenes().get(j);
-				//probabilityMatrices.get(indexProbMatrix)[bestElement][j]=probabilityMatrices.get(indexProbMatrix)[i][j]*(1-ConfigurationsGA.LEARNING_RATE)+
-				//												ch.getGenes().get(j);	
-				probabilityMatrices.get(indexProbMatrix)[bestElement][j]=probabilityMatrices.get(indexProbMatrix)[bestElement][j]+ConfigurationsGA.LEARNING_RATE;	
+				int bestElement=ch.getGenes().get(j);												
+				probabilityMatrices.get(indexProbMatrix)[bestElement][j]=probabilityMatrices.get(indexProbMatrix)[bestElement][j]+ConfigurationsGA.LEARNING_RATE;
+				
+
+				for(int k=0;k<ConfigurationsGA.QTD_SCRIPTS;k++)
+				{
+					if(k!=bestElement)
+					{
+						probabilityMatrices.get(indexProbMatrix)[k][j]=probabilityMatrices.get(indexProbMatrix)[k][j]-(ConfigurationsGA.LEARNING_RATE/(ConfigurationsGA.QTD_SCRIPTS-1));
+					}
+				}
 			}
 		}
 		

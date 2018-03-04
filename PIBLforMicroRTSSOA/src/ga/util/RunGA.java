@@ -20,6 +20,7 @@ public class RunGA {
 	private Population population;
 	private ArrayList<Population> populations;
 	private ProbabilityMatrix probabilityMat;
+	Population completePopulation;
 	
 	private Instant timeInicial;
 	private int generations=0;
@@ -34,56 +35,37 @@ public class RunGA {
 		probabilityMat=new ProbabilityMatrix();
 				
 		//Fase 1 = gerar a população inicial 
-		populations=new ArrayList<Population>();
-		for(int i=1;i<=ConfigurationsGA.SIZE_CHROMOSOME;i++)
-		{
-			System.out.println("pop "+i);
-			population = Population.getInitialPopulation(i, probabilityMat);
-			System.out.println("end pop");
-			population.printWithValue();
-			populations.add(population);
-		}
+		newPopulation();
 		
 		//Fase 2 = avalia a população
-		HashMap<Chromosome, BigDecimal> ChromosomesCompletePopulation =  new HashMap<>();
-		Population completePopulation=new Population(ChromosomesCompletePopulation);
-		
-		for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
-		{			
-			ChromosomesCompletePopulation.putAll(populations.get(i).getChromosomes());
-		}
-		completePopulation.setChromosomes(ChromosomesCompletePopulation);
-		completePopulation = evalFunction.evalPopulation(completePopulation,this.generations);
-		for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
-		{			
-			updateFitnessPopulation(populations.get(i),completePopulation);
-			System.out.println("newUpdated");
-			populations.get(i).printWithValue();
-		}
-		
+		evaluatePopulation(evalFunction);
 		
 		
 		resetControls();
 		//Fase 3 = critério de parada
 		while(continueProcess()){
 			
-			//Fase 4 = Atualiza probabilities
+			
 			for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
 			{
+				//Fase 4 = Atualiza probabilities
 				probabilityMat.updateMatrix(populations,i);
+			
+				//Fase 5 - Mutacao
+				Selection selecao = new Selection();
+				selecao.Mutation(populations.get(i));			
 			}
-			//Fase 5 - Mutacao
-			Selection selecao = new Selection();
-			population = selecao.applySelection(population);
+			
+			//Fase 6 - Geracao nova populacao
+			newPopulation();
 			
 			//Repete-se Fase 2 = Avaliação da população
-			population = evalFunction.evalPopulation(population,this.generations);
+			evaluatePopulation(evalFunction);
 			
 			//atualiza a geração
 			updateGeneration();
 		}
-		
-		return population;
+		return completePopulation;
 	}
 	
 	private void updateGeneration(){
@@ -149,5 +131,36 @@ public class RunGA {
 	        }
 	        it.remove(); // avoids a ConcurrentModificationException
 	    }
+	}
+	
+	public void newPopulation()
+	{
+		populations=new ArrayList<Population>();
+		for(int i=1;i<=ConfigurationsGA.SIZE_CHROMOSOME;i++)
+		{
+			System.out.println("pop "+i);
+			population = Population.getInitialPopulation(i, probabilityMat);
+			System.out.println("end pop");
+			//population.printWithValue();
+			populations.add(population);
+		}
+	}
+	public void evaluatePopulation(RatePopulation evalFunction)
+	{
+	
+		HashMap<Chromosome, BigDecimal> ChromosomesCompletePopulation =  new HashMap<>();
+		completePopulation=new Population(ChromosomesCompletePopulation);
+		
+		for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
+		{			
+			ChromosomesCompletePopulation.putAll(populations.get(i).getChromosomes());
+		}
+		completePopulation.setChromosomes(ChromosomesCompletePopulation);
+		completePopulation = evalFunction.evalPopulation(completePopulation,this.generations);
+		for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
+		{			
+			updateFitnessPopulation(populations.get(i),completePopulation);
+			//populations.get(i).printWithValue();
+		}
 	}
 }
