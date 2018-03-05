@@ -48,27 +48,27 @@ public class PreSelection {
 		}
 		return listParents;
 	}
-	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
-		List list = new LinkedList(map.entrySet());
-
-		Collections.sort(list, new Comparator() {
-			public int compare(Object o1, Object o2) {
-				return ((Comparable) ((Map.Entry) (o2)).getValue())
-						.compareTo(((Map.Entry) (o1)).getValue());
-			}
-		});
-
-		HashMap sortedHashMap = new LinkedHashMap();
-		for (Iterator it = list.iterator(); it.hasNext();) {
-			Map.Entry entry = (Map.Entry) it.next();
-			sortedHashMap.put(entry.getKey(), entry.getValue());
-			if(sortedHashMap.size()==ConfigurationsGA.SIZE_ELITE)
-			{
-				break;
-			}
-		} 
-		return sortedHashMap;
-
-	}
+//	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+//		List list = new LinkedList(map.entrySet());
+//
+//		Collections.sort(list, new Comparator() {
+//			public int compare(Object o1, Object o2) {
+//				return ((Comparable) ((Map.Entry) (o2)).getValue())
+//						.compareTo(((Map.Entry) (o1)).getValue());
+//			}
+//		});
+//
+//		HashMap sortedHashMap = new LinkedHashMap();
+//		for (Iterator it = list.iterator(); it.hasNext();) {
+//			Map.Entry entry = (Map.Entry) it.next();
+//			sortedHashMap.put(entry.getKey(), entry.getValue());
+//			if(sortedHashMap.size()==ConfigurationsGA.SIZE_ELITE)
+//			{
+//				break;
+//			}
+//		} 
+//		return sortedHashMap;
+//
+//	}
 
 }

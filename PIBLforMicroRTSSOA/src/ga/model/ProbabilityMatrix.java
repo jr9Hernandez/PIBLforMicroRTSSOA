@@ -66,7 +66,7 @@ public class ProbabilityMatrix {
 				{
 					if(k!=bestElement)
 					{
-						probabilityMatrices.get(indexProbMatrix)[k][j]=probabilityMatrices.get(indexProbMatrix)[k][j]-(ConfigurationsGA.LEARNING_RATE/(ConfigurationsGA.QTD_SCRIPTS-1));
+						probabilityMatrices.get(indexProbMatrix)[k][j]=probabilityMatrices.get(indexProbMatrix)[k][j]-(ConfigurationsGA.LEARNING_RATE/((double)ConfigurationsGA.QTD_SCRIPTS-1));
 					}
 				}
 			}
@@ -134,7 +134,7 @@ public class ProbabilityMatrix {
 		for (Iterator it = list.iterator(); it.hasNext();) {
 			Map.Entry entry = (Map.Entry) it.next();
 			sortedHashMap.put(entry.getKey(), entry.getValue());
-			if(sortedHashMap.size()==ConfigurationsGA.SIZE_ELITE)
+			if(sortedHashMap.size()==ConfigurationsGA.SIZE_POPULATION)
 			{
 				break;
 			}

@@ -52,8 +52,8 @@ public class RunGA {
 				probabilityMat.updateMatrix(populations,i);
 			
 				//Fase 5 - Mutacao
-				Selection selecao = new Selection();
-				selecao.Mutation(populations.get(i));			
+				//Selection selecao = new Selection();
+				//selecao.Mutation(populations.get(i));			
 			}
 			
 			//Fase 6 - Geracao nova populacao

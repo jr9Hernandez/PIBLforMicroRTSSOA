@@ -12,7 +12,7 @@ public final class ConfigurationsGA {
 	//Total de jobs que serão enviados ao cluster
 	public final static int NUMBER_JOBS = 30;
 	//tamanho fixo da elite
-	public final static int SIZE_ELITE = 10;
+	//public final static int SIZE_ELITE = 10;
 	//tamanho fixo do k do torneio
 	public final static int K_TOURNMENT = 3;
 	//tamanho fixo dos pais para crossover
