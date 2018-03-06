@@ -37,23 +37,23 @@ public class RoundRobinEval implements RatePopulation{
 	
 	//This was commented by Julian
 	public Population evalPopulation(Population population, int generation) {
-//		this.atualGeneration = generation;
-//		//limpa os valores existentes na population
-//		population.clearValueChromosomes();
-//		
-//		//executa os confrontos
-//		runBattles(population);
-//		
-//		//Só permite continuar a execução após terminar os JOBS.
-//		controllExecute();
-//				
-//		//remove qualquer aquivo que não possua um vencedor
-//		removeLogsEmpty();
-//
-//		//ler resultados
-//		ArrayList<EvalResult> resultados = lerResultados();
-//		//atualizar valores das populacoes
-//		updatePopulationValue(resultados, population);
+		this.atualGeneration = generation;
+		//limpa os valores existentes na population
+		population.clearValueChromosomes();
+		
+		//executa os confrontos
+		runBattles(population);
+		
+		//Só permite continuar a execução após terminar os JOBS.
+		controllExecute();
+				
+		//remove qualquer aquivo que não possua um vencedor
+		removeLogsEmpty();
+
+		//ler resultados
+		ArrayList<EvalResult> resultados = lerResultados();
+		//atualizar valores das populacoes
+		updatePopulationValue(resultados, population);
 
 		return population;
 	}
