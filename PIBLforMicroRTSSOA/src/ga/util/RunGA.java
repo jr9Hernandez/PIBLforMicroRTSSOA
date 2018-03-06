@@ -65,6 +65,12 @@ public class RunGA {
 			//atualiza a geração
 			updateGeneration();
 		}
+		
+		for(int i=0;i<ConfigurationsGA.SIZE_CHROMOSOME;i++)
+		{
+			probabilityMat.printMatrix(probabilityMat.getProbabilityMatrices().get(i));
+		}
+		
 		return completePopulation;
 	}
 	
@@ -135,13 +141,13 @@ public class RunGA {
 	
 	public void newPopulation()
 	{
-		System.out.println("New Big Population");
+		//System.out.println("New Big Population");
 		populations=new ArrayList<Population>();
 		for(int i=1;i<=ConfigurationsGA.SIZE_CHROMOSOME;i++)
 		{
-			System.out.println("pop "+i);
+			//System.out.println("pop "+i);
 			population = Population.getInitialPopulation(i, probabilityMat);
-			System.out.println("end pop");
+			//System.out.println("end pop");
 			//population.printWithValue();
 			populations.add(population);
 		}

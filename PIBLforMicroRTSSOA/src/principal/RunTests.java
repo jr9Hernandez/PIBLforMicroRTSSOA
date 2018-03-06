@@ -46,6 +46,8 @@ public class RunTests {
 		
 		popFinal.printWithValue();
 		
+		
+		
 		//Fase 6 - mostrar os mais aptos na população final
 		
 		//Fase 7 - finalizar - commented by Julian

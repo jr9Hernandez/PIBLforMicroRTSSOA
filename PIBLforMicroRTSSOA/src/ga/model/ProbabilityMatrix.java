@@ -26,13 +26,13 @@ public class ProbabilityMatrix {
 	
 	public void ProbabilitiesMatrixGeneration(int numMatrices)
 	{
-		System.out.println("Creating Matrix");
+		//System.out.println("Creating Matrix");
 		this.numMatrices=numMatrices;
 		probabilityMatrices=new ArrayList<double[][]>();
 		for(int i=1;i<=numMatrices;i++)
 		{			
 			probabilityMatrices.add(ProbabilitiesMatrixInitialization(i,ConfigurationsGA.QTD_SCRIPTS));
-			printMatrix(probabilityMatrices.get(i-1));
+			//printMatrix(probabilityMatrices.get(i-1));
 		}
 		
 		
@@ -52,7 +52,7 @@ public class ProbabilityMatrix {
 	}
 	public void updateMatrix(ArrayList<Population> populations, int indexProbMatrix )
 	{
-		System.out.println("updating matrix");
+		//System.out.println("updating matrix");
 		Population populationToUpdate=populations.get(indexProbMatrix);
 		sortByValue(populationToUpdate.getChromosomes());
 		
@@ -62,7 +62,7 @@ public class ProbabilityMatrix {
 			{
 				//System.out.println("updating matrix "+j);
 				Chromosome ch=(Chromosome)populationToUpdate.getChromosomes().keySet().toArray()[i];
-				ch.print();
+				//ch.print();
 				int bestElement=ch.getGenes().get(j);												
 				probabilityMatrices.get(indexProbMatrix)[bestElement][j]=probabilityMatrices.get(indexProbMatrix)[bestElement][j]+ConfigurationsGA.LEARNING_RATE;
 				
@@ -77,7 +77,7 @@ public class ProbabilityMatrix {
 				
 			}
 		}
-		printMatrix(probabilityMatrices.get(indexProbMatrix));
+		//printMatrix(probabilityMatrices.get(indexProbMatrix));
 	}
 	public void printMatrix(double[][] matrix)
 	{
