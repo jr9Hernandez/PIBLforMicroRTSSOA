@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
 import ga.config.ConfigurationsGA;
 import ga.model.Chromosome;
 import ga.model.Population;

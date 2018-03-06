@@ -20,7 +20,7 @@ public final class ConfigurationsGA {
 	//taxa mutacao
 	public final static double MUTATION_RATE = 0.01;
 	//taxa aprendizado
-	public final static double LEARNING_RATE = 0.025;
+	public final static double LEARNING_RATE = 0.03;
 	//Numero de vetores que influenciam na atualizacao da matriz de probabilidades
 	public final static int NUMBER_OF_VECTORS_TO_UPDATE_FROM=1;
 	//---------------------------------------------------------------------------------

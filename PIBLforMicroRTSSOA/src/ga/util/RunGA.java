@@ -129,12 +129,13 @@ public class RunGA {
 	        {
 	        	p.getChromosomes().put((Chromosome)pair.getKey(), (BigDecimal)pair.getValue());
 	        }
-	        it.remove(); // avoids a ConcurrentModificationException
+	        //it.remove(); // avoids a ConcurrentModificationException
 	    }
 	}
 	
 	public void newPopulation()
 	{
+		System.out.println("New Big Population");
 		populations=new ArrayList<Population>();
 		for(int i=1;i<=ConfigurationsGA.SIZE_CHROMOSOME;i++)
 		{
@@ -147,7 +148,6 @@ public class RunGA {
 	}
 	public void evaluatePopulation(RatePopulation evalFunction)
 	{
-	
 		HashMap<Chromosome, BigDecimal> ChromosomesCompletePopulation =  new HashMap<>();
 		completePopulation=new Population(ChromosomesCompletePopulation);
 		
@@ -162,5 +162,6 @@ public class RunGA {
 			updateFitnessPopulation(populations.get(i),completePopulation);
 			//populations.get(i).printWithValue();
 		}
+		
 	}
 }
