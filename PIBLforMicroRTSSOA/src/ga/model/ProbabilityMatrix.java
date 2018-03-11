@@ -102,8 +102,8 @@ public class ProbabilityMatrix {
 		double sum=0;
 		int j=0;
 		int selected=-1;		
-		double fraction=rand.nextInt(100);
-		fraction=fraction/100;
+		double fraction=rand.nextDouble();
+		//fraction=fraction/100;
 		while(selected<0 && j<vector.length)
 		{
 			sum=sum+(vector[j]);
@@ -116,7 +116,7 @@ public class ProbabilityMatrix {
 				j=j+1;
 			}
 		}
-		if(j==vector.length && sum>0.9)
+		if(j==vector.length && sum>0.95)
 		{
 			j=j-1;
 		}
