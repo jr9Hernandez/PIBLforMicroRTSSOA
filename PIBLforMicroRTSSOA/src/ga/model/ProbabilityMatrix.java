@@ -107,7 +107,7 @@ public class ProbabilityMatrix {
 		while(selected<0 && j<vector.length)
 		{
 			sum=sum+(vector[j]);
-			if(sum>fraction)
+			if(sum>=fraction)
 			{
 				selected=j;
 			}
