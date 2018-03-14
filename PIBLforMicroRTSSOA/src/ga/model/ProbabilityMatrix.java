@@ -116,7 +116,7 @@ public class ProbabilityMatrix {
 				j=j+1;
 			}
 		}
-		if(j==vector.length && sum>0.95)
+		if(j>=vector.length && sum>0.95)
 		{
 			j=j-1;
 		}
