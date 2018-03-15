@@ -145,10 +145,6 @@ public class ProbabilityMatrix {
 		for (Iterator it = list.iterator(); it.hasNext();) {
 			Map.Entry entry = (Map.Entry) it.next();
 			sortedHashMap.put(entry.getKey(), entry.getValue());
-			if(sortedHashMap.size()==ConfigurationsGA.SIZE_POPULATION)
-			{
-				break;
-			}
 		} 
 		return sortedHashMap;
 
