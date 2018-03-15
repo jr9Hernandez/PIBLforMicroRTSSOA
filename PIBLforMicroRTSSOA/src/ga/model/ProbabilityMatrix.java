@@ -1,5 +1,6 @@
 package ga.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -54,7 +55,7 @@ public class ProbabilityMatrix {
 	{
 		//System.out.println("updating matrix");
 		Population populationToUpdate=populations.get(indexProbMatrix);
-		sortByValue(populationToUpdate.getChromosomes());
+		populationToUpdate.setChromosomes((HashMap<Chromosome, BigDecimal>)sortByValue(populationToUpdate.getChromosomes()));
 		
 		for(int i=0;i<ConfigurationsGA.NUMBER_OF_VECTORS_TO_UPDATE_FROM;i++)
 		{
