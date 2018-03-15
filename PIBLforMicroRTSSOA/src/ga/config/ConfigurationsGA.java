@@ -10,7 +10,7 @@ public final class ConfigurationsGA {
 	//tamanho fixo de cada subpopulação
 	public final static int SIZE_SUBPOPULATION = 4;
 	//Total de jobs que serão enviados ao cluster
-	public final static int NUMBER_JOBS = 30;
+	public final static int NUMBER_JOBS = 35;
 	//tamanho fixo da elite
 	//public final static int SIZE_ELITE = 10;
 	//tamanho fixo do k do torneio
