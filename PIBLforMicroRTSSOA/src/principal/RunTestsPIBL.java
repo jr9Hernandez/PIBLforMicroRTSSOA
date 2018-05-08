@@ -6,7 +6,7 @@ import ga.util.RunGA;
 import ga.util.Evaluation.RatePopulation;
 import ga.util.Evaluation.RoundRobinEval;
 
-public class RunTests {
+public class RunTestsPIBL {
 
 	public static void main(String[] args) {
 		//classe com as configurações = ConfigurationsGA
